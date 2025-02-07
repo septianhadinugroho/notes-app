@@ -12,13 +12,13 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    if (!validateEmail(email)) {
-      setError('Please enter a valid email address.');
+    if(!validateEmail(email)) {
+      setError('Please enter a valid email address');
       return;
     }
 
-    if (!password) {
-      setError("Please enter the password.")
+    if(!password) {
+      setError('Please enter the password')
       return;
     }
 
