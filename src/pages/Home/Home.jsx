@@ -7,6 +7,8 @@ import Modal from 'react-modal'
 
 const Home = () => {
 
+  Modal.setAppElement('#root');
+
   const [openAddEditModal, setOpenAddEditModal] = useState ({
     isShown: false,
     type: 'add',
@@ -30,26 +32,6 @@ const Home = () => {
               onDelete={()=>{}}
               onPinNote={()=>{}}
             />
-            <NoteCard
-              title='Meeting Jam 10'
-              date='11 Februari 2025'
-              content='Meeting Akademik Kuliah'
-              tags='#Meeting'
-              isPinned={ true }
-              onEdit={()=>{}}
-              onDelete={()=>{}}
-              onPinNote={()=>{}}
-            />
-            <NoteCard
-              title='Meeting Jam 10'
-              date='11 Februari 2025'
-              content='Meeting Akademik Kuliah'
-              tags='#Meeting'
-              isPinned={ true }
-              onEdit={() =>{}}
-              onDelete={() => {}}
-              onPinNote={() => {}}
-            />
           </div>
         </div>
 
@@ -72,7 +54,13 @@ const Home = () => {
            contentLabel=''
            className='w-[40%] max-h-3/4 bg-white rounded-md mx-auto mt-14 p-5 overflow-scroll'
         >
-          <AddEditNotes />
+          <AddEditNotes
+            type={openAddEditModal.type}
+            noteData={openAddEditModal.data}
+            onClose={() => {
+              setOpenAddEditModal({ isShown: false, type: "add", data: null });
+            }}
+          />
         </Modal>
       </>
     </div>
