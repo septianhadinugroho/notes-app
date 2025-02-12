@@ -17,6 +17,7 @@ const Home = () => {
     data: null,
   })
 
+  const [allNotes, setAllNotes] = useState([]);
   const [userInfo, setUserInfo] = useState(null);
 
   const navigate = useNavigate();
@@ -36,7 +37,21 @@ const Home = () => {
     }
   };
 
+  // Get All Notes
+  const getAllNotes = async () => {
+      try {
+        const response = await axiosInstance.get("/get-all-notes");
+
+        if (response.data && response.data.notes) {
+          setAllNotes(response.data.notes);
+        }
+      } catch (error) {
+        console.log("An unexpected error occurred. Please try again.");
+    };
+  }
+
   useEffect(() => {
+    getAllNotes();
     getUserInfo();
     return () => {};
   }, []);
@@ -48,16 +63,19 @@ const Home = () => {
         
         <div className='container mx-auto px-20'>
           <div className='grid grid-cols-3 gap-4 mt-8'>
+          {allNotes.map((item, index) => (
             <NoteCard
-              title='Bimbingan Jam 10'
-              date='10 Februari 2025'
-              content='Bimbingan Akademik KRS Semester 6'
-              tags='#Kuliah'
-              isPinned={ true }
+              key={item._id}
+              title={item.title}
+              date={item.createdOn}
+              content={item.content}
+              tags={item.tags}
+              isPinned={item.isPinned}
               onEdit={()=>{}}
               onDelete={()=>{}}
               onPinNote={()=>{}}
             />
+          ))}
           </div>
         </div>
 
