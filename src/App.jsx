@@ -5,7 +5,7 @@ import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
 
 const routes = (
-  <Router basename="/notes-app">
+  <Router>
     <Routes>
       <Route path="/" exact element={<Home />} />
       <Route path="/login" exact element={<Login />} />
